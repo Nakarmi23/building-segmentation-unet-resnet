@@ -45,10 +45,9 @@ def main():
     model.eval()
 
     num_samples = 10  # how many images to visualize
-    random_seed = 42  # optional, for reproducibility
 
-    random.seed(random_seed)
     indices = random.sample(range(len(ds)), num_samples)
+    print("Visualizing samples at indices:", indices)
 
     for i in indices:
         img, mask, meta = ds[i]
