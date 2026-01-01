@@ -120,7 +120,7 @@ class WHUDataset(Dataset):
             raise ValueError(f"Invalid split: {self.split}. Supported splits are 'train', 'val', 'test'.")
         
         self.images_dir = self.root_dir / self.split / "image"
-        self.masks_dir = self.root_dir / self.split / "mask"
+        self.masks_dir = self.root_dir / self.split / "label"
 
         self.transform = transform
         self.return_meta = return_meta
