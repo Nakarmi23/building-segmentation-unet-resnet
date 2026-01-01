@@ -1,0 +1,89 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Virtual environments
+venv/
+.env/
+.venv/
+env/
+
+# =========================
+# Jupyter / Experiments
+# =========================
+.ipynb_checkpoints/
+*.log
+
+# =========================
+# PyTorch / Training Artifacts
+# =========================
+*.pt
+*.pth
+*.ckpt
+*.onnx
+
+# =========================
+# Dataset (DO NOT COMMIT DATA)
+# =========================
+data/
+
+# If you use symlinks or external disks
+*.zip
+*.tar
+*.tar.gz
+
+# =========================
+# Outputs / Results
+# =========================
+outputs/
+results/
+runs/
+checkpoints/
+predictions/
+inference/
+figures/generated/
+
+# =========================
+# Images / Masks generated during training
+# =========================
+*.png
+*.jpg
+*.jpeg
+*.tif
+*.tiff
+
+# Allow documentation images
+!docs/
+!docs/**/*.png
+!docs/**/*.jpg
+
+# =========================
+# IDEs & OS
+# =========================
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# =========================
+# Configuration / Secrets
+# =========================
+.env
+*.yaml
+*.yml
+
+# =========================
+# Temporary files
+# =========================
+tmp/
+temp/
+cache/
