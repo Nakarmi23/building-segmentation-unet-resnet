@@ -44,7 +44,7 @@ data/
 # =========================
 # Outputs / Results
 # =========================
-outputs/
+outputs/preds
 results/
 runs/
 predictions/
