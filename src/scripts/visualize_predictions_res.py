@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from src.datasets.whu_dataset import WHUDataset, build_transforms
-from src.models.unet import UNet
+from src.models.resunet import ResUNet
 
 def save_vis(img, gt, pred, out_path: Path, title:str):
     mean = torch.tensor([0.485, 0.456, 0.406]).view(3,1,1)
@@ -36,11 +36,11 @@ def main():
 
     tfm = build_transforms(train=False, image_size=(256,256))
     ds = WHUDataset(root_dir='data/', split='test', transform=tfm, return_meta=True)
-    out_dir = Path('outputs/preds/unet')
+    out_dir = Path('outputs/preds/resunet')
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    model = UNet(features=(32, 64, 128, 256)).to(device)
-    ckpt = torch.load('checkpoints/unet/best.pt', map_location=device)
+    model = ResUNet(in_channels=3, out_channels=1).to(device)
+    ckpt = torch.load('checkpoints/resunet/best.pt', map_location=device)
     model.load_state_dict(ckpt['model_state'])
     model.eval()
 
@@ -50,20 +50,20 @@ def main():
     print("Visualizing samples at indices:", indices)
 
     # for i in indices:
-    #     img, mask, meta = ds[i]
-    #     with torch.no_grad():
-    #         logits = model(img.unsqueeze(0).to(device))
-    #         prob = torch.sigmoid(logits).cpu().squeeze(0)
-        
-    #     save_vis(img, mask, prob, out_dir / f"{i:02d}_{meta['stem']}.png", meta["stem"])
-
-    i = 2290
+    #         img, mask, meta = ds[i]
+    #         with torch.no_grad():
+    #             logits = model(img.unsqueeze(0).to(device))
+    #             prob = torch.sigmoid(logits).cpu().squeeze(0)
+            
+    #         save_vis(img, mask, prob, out_dir / f"{i:02d}_{meta['stem']}.png", meta["stem"])
+    i = 2289
     img, mask, meta = ds[i]
     with torch.no_grad():
         logits = model(img.unsqueeze(0).to(device))
         prob = torch.sigmoid(logits).cpu().squeeze(0)
     
     save_vis(img, mask, prob, out_dir / f"{i:02d}_{meta['stem']}.png", meta["stem"])
+        
 
     print("Saved prediction visuals to:", out_dir)
 
