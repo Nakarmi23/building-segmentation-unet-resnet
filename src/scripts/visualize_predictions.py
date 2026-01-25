@@ -49,21 +49,21 @@ def main():
     indices = random.sample(range(len(ds)), num_samples)
     print("Visualizing samples at indices:", indices)
 
-    # for i in indices:
-    #     img, mask, meta = ds[i]
-    #     with torch.no_grad():
-    #         logits = model(img.unsqueeze(0).to(device))
-    #         prob = torch.sigmoid(logits).cpu().squeeze(0)
+    for i in indices:
+        img, mask, meta = ds[i]
+        with torch.no_grad():
+            logits = model(img.unsqueeze(0).to(device))
+            prob = torch.sigmoid(logits).cpu().squeeze(0)
         
-    #     save_vis(img, mask, prob, out_dir / f"{i:02d}_{meta['stem']}.png", meta["stem"])
+        save_vis(img, mask, prob, out_dir / f"{i:02d}_{meta['stem']}.png", meta["stem"])
 
-    i = 2290
-    img, mask, meta = ds[i]
-    with torch.no_grad():
-        logits = model(img.unsqueeze(0).to(device))
-        prob = torch.sigmoid(logits).cpu().squeeze(0)
+    # i = 2290
+    # img, mask, meta = ds[i]
+    # with torch.no_grad():
+    #     logits = model(img.unsqueeze(0).to(device))
+    #     prob = torch.sigmoid(logits).cpu().squeeze(0)
     
-    save_vis(img, mask, prob, out_dir / f"{i:02d}_{meta['stem']}.png", meta["stem"])
+    # save_vis(img, mask, prob, out_dir / f"{i:02d}_{meta['stem']}.png", meta["stem"])
 
     print("Saved prediction visuals to:", out_dir)
 
